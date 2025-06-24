@@ -1,0 +1,100 @@
+.progress-steps {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.progress-steps .top {
+    margin-bottom: -40px;
+    position: relative;
+}
+
+.progress-steps .top .progress {
+    width: 100%;
+    height: 3px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 20%; 
+    left: 0;
+    z-index: -1;
+}
+
+.progress-steps .top .progress span {
+    position: absolute;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: #428478;
+    transition: width 0.5s ease;
+}
+
+.progress-steps .top .steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-steps .top .steps .step {
+    background-color: white;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%;
+    padding: 5px 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.progress-steps .top .steps .step.active {
+    border-color: #428478;
+    background: #428478;
+    color: white;
+}
+
+.progress-steps .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0px 20px;
+    margin-top: 20px;
+}
+
+.progress-steps .buttons .btn {
+    outline: none;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #428478;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.progress-steps .buttons .btn:hover {
+    background-color: #3f4a57;
+}
+
+.progress-steps .buttons .btn.disabled {
+    background-color: #e0e0e0;
+    color: #bdbdbd;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .progress-steps {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .progress-steps .top .steps .step {
+        padding: 5px 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+}

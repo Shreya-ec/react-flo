@@ -1,0 +1,47 @@
+.react-tel-input .form-control {
+    position: relative !important;
+    font-size: 14px !important;
+    letter-spacing: .01rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px !important;
+    margin-left: 0 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #CACACA !important;
+    border-radius: 5px !important;
+    line-height: 25px !important;
+    height: 35px !important;
+    width: 100% !important;
+    outline: none !important;
+}
+
+.phone-input-group {
+    position: relative;
+}
+
+.react-tel-input .form-control {
+    padding-right: 2.5rem !important;
+    /* Make sure there's space for the icon */
+}
+
+.phone-input-icon {
+    position: absolute;
+    top: 50%;
+    right: -2px;
+    transform: translateY(-52%);
+    pointer-events: none;
+    height: 35px;
+}
+
+.inputStyle {
+    width: 33px !important;
+    height: 40px;
+    border-radius: 7px;
+    border: 0px;
+    margin-left: 8px;
+    margin-right: 8px;
+    background: #b4b4b6;
+    font-size: 20px;
+}
+
+

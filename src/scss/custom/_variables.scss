@@ -1,0 +1,745 @@
+//icons
+.icon-clg {
+    width: 80px;
+    height: 80px;
+}
+
+.icon-wide {
+    width: 1.3rem;
+}
+
+
+//dropdown nested in whatsappppp
+.nestedDropdown .dropdown-link {
+    margin-bottom: 5px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.nestedDropdown .dropdown-link:hover,
+.hover-info:hover {
+    color: #007bff !important;
+}
+
+.notAllowed {
+    opacity: 0.5;
+}
+
+.notAllowed:hover {
+    cursor: not-allowed;
+}
+
+// blue card
+.card.light {
+    background-color: #E5E7EB;
+}
+
+/* Highlight the selected radio button */
+.highlight {
+    background-color: #f0f8ff;
+    padding: 8px 0px 0px 0px;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 10px !important;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    /* Position the arrow outside of the highlight box */
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 10px solid #f0f8ff;
+    /* Color to match the background */
+}
+
+/* Highlight the corresponding form group */
+.highlight-form {
+    background-color: #f0f8ff;
+    // border: 2px solid #007bff;
+    padding: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    height: auto;
+}
+
+.react-datetime-picker {
+    z-index: 1000;
+    /* Ensure this is high enough */
+    position: relative;
+}
+
+.container {
+    overflow: visible;
+    /* Make sure overflow is not hidden */
+}
+
+.custom-datetime-picker {
+    z-index: 1000;
+    position: relative;
+}
+
+//~~~~~~~~~~chars count~~~~~~~~~~~~~~
+
+.withChars {
+    position: relative;
+
+    .form-control {
+        padding: 0.5rem 2.8rem 0.5rem 0.5rem;
+    }
+}
+
+.chars_count {
+    position: absolute;
+    bottom: 1%;
+    right: 5%;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 500;
+    color: #4B5563;
+}
+
+.chars_count.ta {
+    right: 3%;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~TEMPLATE Previews~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.img-cont {
+    max-height: 90vh;
+    position: relative;
+}
+
+.preview-cont {
+    width: 94%;
+    height: 75%;
+    position: absolute; //<------------------
+    top: 15%;
+    left: 5px;
+    overflow: auto;
+}
+
+//sms
+.preview-name {
+    width: 100%;
+
+    position: absolute; //<------------------
+    top: 8%;
+    left: 0;
+
+    display: flex; //<----for ellipsis
+
+    .sender {
+        margin: 0 10% 0 30%;
+        background-color: #E6ECF0;
+        color: #000000;
+        font-weight: 500;
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.preview-cont .time_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & span {
+        font-size: 0.75rem;
+        color: #71767e;
+        font-weight: 500;
+        line-height: 14px;
+    }
+}
+
+#smsBody {
+    background-color: #E6ECF0;
+    color: #000;
+    border-radius: 10px;
+
+    margin: 10px 0 0 1.7rem;
+    padding: 5px;
+    width: 70%;
+    font-size: 1rem;
+
+    overflow-wrap: break-word;
+}
+
+//whatsApp
+.whatsBody {
+    margin: 10px 0 0 1.7rem;
+    width: 70%;
+    padding: 5px;
+
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+
+    overflow-wrap: break-word;
+
+    font-size: 1rem;
+
+    box-shadow: 0 1px 2px #b5b6b8;
+    overflow-x: hidden; //for btn divider width
+}
+
+.w-header {
+    display: block;
+    font-weight: 700;
+    width: 100%;
+}
+
+.w-image {
+    border-radius: inherit;
+}
+
+.w-doc {
+    width: 100%;
+    height: 80px;
+    border-radius: inherit;
+    background-color: #CDD0D5;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+        height: 60px;
+        width: 45px;
+    }
+}
+
+.w-body {
+    margin: 4px 0;
+}
+
+.w-footer {
+    opacity: 0.5;
+    font-size: 0.85rem;
+}
+
+.wdivider {
+    height: 1px;
+    width: 110%;
+    margin: 5px -5px 0 -5px;
+    background-color: #E2E0DB;
+}
+
+.whatsButton {
+    background-color: #fff;
+    color: #34B7F1;
+
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    svg {
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    .btn-txt {
+        font-size: 1rem;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+// carousel preview
+.cards-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 5px 0 0 1.7rem;
+}
+
+.cardsBody {
+    width: 78%;
+    padding: 5px;
+
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+
+    overflow-wrap: break-word;
+
+    font-size: 1rem;
+
+    box-shadow: 0 1px 2px #b5b6b8;
+    overflow-x: hidden;
+
+    flex-shrink: 0; //<-----------for img shrinkage
+}
+
+.cards-slider {
+    width: 90%;
+    overflow-x: scroll;
+}
+
+.cards-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-slider {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+// -------------------emoji picker-----------------------
+.emojiPicker {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #888;
+
+    position: relative;
+}
+
+.emojiPickerBox {
+    position: absolute;
+    top: 32px;
+    left: 80%;
+    z-index: 1000;
+    border: 1px solid #ccc;
+    background-color: #dad6d6;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+//-------------------PREVIEW @TABLE----------------------
+.previewWhatsTemp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    text-align: left;
+
+    & p {
+        margin: 0;
+    }
+
+    .wp-body {
+        opacity: 0.9;
+    }
+
+    .wp-footer {
+        opacity: 0.6;
+    }
+
+    .wp-btns {
+        border-top: 1px solid gray;
+
+        & p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            color: #34B7F1;
+        }
+    }
+}
+
+.previeSmsTemp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    text-align: left;
+
+    & p {
+        margin: 0;
+    }
+
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border-bottom: 1px solid #9CA3AF;
+        margin: 0 2px 5px 2px;
+    }
+}
+
+
+//hiding scroll-bars 
+.preview-cont::-webkit-scrollbar,
+.preview-cont input::-webkit-scrollbar,
+.preview-cont textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.preview-cont,
+.preview-cont textarea,
+.preview-cont input {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+// VALIDATION - NO TICK ON VALIDATED
+.was-validated .form-select:valid:not([multiple]):not([size]),
+.was-validated .form-select:valid:not([multiple])[size="1"],
+.form-select.is-valid:not([multiple]):not([size]),
+.form-select.is-valid:not([multiple])[size="1"] {
+    background-image: none !important;
+}
+
+// datepicker
+.rdtPicker {
+    display: none;
+    min-width: 250px;
+    padding: 4px;
+    margin-top: 1px;
+    z-index: 99999 !important;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    border: 1px solid #262B40;
+}
+
+// dropzone
+.dropzone-filename {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropzone-image,
+.dropzone-video {
+    width: 100%;
+    height: 90%;
+    object-fit: contain;
+    background-color: #d1d5db;
+}
+
+.dropzone-preview {
+    max-height: 250px;
+}
+
+/* Counter.css */
+/* Styling for the number text */
+.counter {
+    font-weight: bold;
+    font-size: 1.5rem;
+    /* Adjust font size as needed */
+    color: #333;
+    /* Default color, can be overridden */
+    transition: all 0.3s ease;
+    /* Smooth transition for visual effects */
+}
+
+/* Optional: Pulse effect when value changes */
+.counter.pulse {
+    animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.icon-container {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+.icon-container:active {
+    transform: scale(0.9);
+    /* Scale down the icon slightly */
+}
+
+.contracted {
+    margin-bottom: 20px;
+    position: relative;
+    left: 1.6rem;
+}
+
+.expanded {
+    max-width: 210px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    left: 1.25rem;
+}
+
+
+/* Switch container and layout */
+.switch-container {
+    display: flex;
+    /* Flexbox for layout */
+    justify-content: flex-end;
+    /* Align the switch to the right */
+    align-items: center;
+    /* Center the switch vertically */
+}
+
+/* Switch styling */
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    border-radius: 20px;
+    background: #81D8F6;
+    /* Default grey background */
+    transition: background 0.28s ease;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Round knob inside the switch */
+.switch::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: #fafafa;
+    border-radius: 50%;
+    transition: left 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+}
+
+.switch:active::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(128, 128, 128, 0.1);
+}
+
+/* Green background when switch is on */
+input:checked+.switch {
+    background: #72da67;
+}
+
+input:checked+.switch::before {
+    left: 27px;
+    background: #fff;
+}
+
+input:checked+.switch:active::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(0, 150, 136, 0.2);
+}
+
+/* Icons inside the switch */
+.phone-logo,
+.email-logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Avoid interfering with switch interactions */
+    transition: opacity 0.28s ease;
+}
+
+/* Positioning the Phone icon when the switch is off */
+.phone-logo {
+    left: 5px;
+    opacity: 1;
+}
+
+/* Positioning the Email icon when the switch is on */
+.email-logo {
+    right: 5px;
+    opacity: 0;
+}
+
+/* Show the email logo when switch is on and hide the phone logo */
+input:checked+.switch .phone-logo {
+    opacity: 0;
+}
+
+input:checked+.switch .email-logo {
+    opacity: 1;
+}
+
+/* Hide icons when they are not needed */
+.hidden {
+    opacity: 0 !important;
+}
+
+//   text-truncate
+.truncate-twoline {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.form-check-input {
+    border: 2px solid #0d6efd;
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    box-shadow: none;
+}
+
+.form-check-input:focus {
+    box-shadow: none;
+}
+
+.permission-indicator {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.table-hover tbody tr:hover .permission-indicator {
+    transform: scale(1.1);
+}
+
+.vr {
+    opacity: 0.3;
+}
+
+th {
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+
+
+
+/* Add this to your CSS file */
+.switch-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.switch-label {
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 150px;
+    height: 36px;
+    position: relative;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.switch-label span {
+    flex: 1;
+    text-align: center;
+    z-index: 1;
+}
+
+.switch-label .slider {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #0d6efd;
+    /* Bootstrap primary */
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.switch-label .slider.manual {
+    transform: translateX(100%);
+}
+
+.custom-toggle-switch {
+    background-color: #e0e0e0;
+    border-radius: 30px;
+    display: flex;
+    overflow: hidden;
+    width: 140px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 6px 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.toggle-btn.active {
+    background-color: #3B32D0;
+    /* Primary Blue */
+    color: #fff;
+}
+
+.loadingFlow {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+    font-size: 25px;
+
+
+    span {
+        display: inline-block;
+        margin: 0 -.05em;
+        animation: loading01 1.4s infinite alternate;
+
+        @for $i from 0 through 6 {
+            &:nth-child(#{$i+1}) {
+                animation-delay: #{$i*.1}s;
+            }
+        }
+    }
+}
+
+@keyframes loading01 {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.breadcrumb-item.active {
+    color: darkblue !important;
+}

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "skipLibCheck": true
+    },
+    "include": [
+        "src",
+        "src/components/.js",
+        "src/api/.js",
+        "src/api/SuperAdmin/UserOnboarding/userType.js",
+        "src/api/"
+    ]
+}
