@@ -6,8 +6,8 @@ export const Routes = {
 
     
 
-    ChatBot: { path: "/chatBot" },
-    ChatFlowScreen: { path: "/chatBot-flow" },
+    ChatBot: { path: "/home" },
+    ChatFlowScreen: { path: "/creatingflow" },
 
 
 

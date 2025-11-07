@@ -113,37 +113,21 @@
 .img-cont {
     max-height: 90vh;
     position: relative;
-}
-
-.preview-cont {
+  
+    & > img {
+      min-width: 400px;
+      max-width: 440px;
+    }
+  }
+  
+  .preview-cont {
     width: 94%;
-    height: 75%;
-    position: absolute; //<------------------
-    top: 15%;
+    height: 66%;
+    position: absolute; //<---------
+    top: 13%;
     left: 5px;
     overflow: auto;
-}
-
-//sms
-.preview-name {
-    width: 100%;
-
-    position: absolute; //<------------------
-    top: 8%;
-    left: 0;
-
-    display: flex; //<----for ellipsis
-
-    .sender {
-        margin: 0 10% 0 30%;
-        background-color: #E6ECF0;
-        color: #000000;
-        font-weight: 500;
-        text-wrap: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
+  }
 
 .preview-cont .time_box {
     display: flex;
@@ -157,20 +141,6 @@
         line-height: 14px;
     }
 }
-
-#smsBody {
-    background-color: #E6ECF0;
-    color: #000;
-    border-radius: 10px;
-
-    margin: 10px 0 0 1.7rem;
-    padding: 5px;
-    width: 70%;
-    font-size: 1rem;
-
-    overflow-wrap: break-word;
-}
-
 //whatsApp
 .whatsBody {
     margin: 10px 0 0 1.7rem;

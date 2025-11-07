@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, Image, Navbar, Dropdown, Container } from "react-bootstrap";
 
-import Profile3 from "assets/img/team/profile-picture-3.jpg";
+import Profile from "assets/img/team/profile-picture.avif";
 
 export default () => {
   const name = localStorage.getItem("chatbotUserName");
@@ -18,9 +18,9 @@ export default () => {
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
                 <div className="media d-flex align-items-center">
-                  <Image src={Profile3} className="avatar rounded-circle" />
+                  <Image src={Profile} className="avatar rounded-circle" />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span className="mb-0 font-small fw-bold text-gray-900">
+                    <span className="mb-0 font-large fw-bold text-gray-900">
                       👋 Welcome {name || "Your Name"}!
                     </span>
                   </div>

@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Routes } from "routes";
 
-export default () => {
+export default function Home() {
   const [name, setName] = useState("");
+  const [shake, setShake] = useState(false);
+  const inputRef = useRef(null);
   const history = useHistory();
 
-  const handleStart = () => {
+  const handleStart = (e) => {
+    e.preventDefault();
     if (name.trim()) {
       localStorage.setItem("chatbotUserName", name);
       history.push(Routes.ChatBot.path);
+    } else {
+      setShake(true);
+      if (inputRef.current) inputRef.current.focus();
+
+      // stop the wiggle after animation
+      setTimeout(() => setShake(false), 1000);
     }
   };
 
@@ -18,19 +27,23 @@ export default () => {
       <div className="doodle">
         <div className="grid">
           <div className="lg">
-            <h1>Craft</h1>
-            <h1>Every</h1>
-            <h1>Conversation</h1>
+            <h1 style={{ animationDelay: "0s" }}>Craft</h1>
+            <h1 style={{ animationDelay: "0.3s" }}>Every</h1>
+            <h1 style={{ animationDelay: "0.6s" }}>Conversation</h1>
             <h3>Design Smarter Chatbot Interactions</h3>
-            <form>
-              <input
-                type="text"
-                placeholder="👋 Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="name-input"
-              />
-              <button type="submit" onClick={handleStart}>
+            <form className="landingForm" onSubmit={handleStart}>
+              <div className="input-wrapper">
+                <span className={`wave-hand ${shake ? "wiggle" : ""}`}>👋</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="name-input"
+                />
+              </div>
+              <button type="submit" className="submitBtn">
                 🚀 Get Started
               </button>
             </form>
@@ -66,4 +79,4 @@ export default () => {
       </div>
     </section>
   );
-};
+}

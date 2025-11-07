@@ -38,7 +38,14 @@ export default () => {
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
 
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([
+    {
+      channel: "WhatsApp",
+      name: "Demo",
+      description:
+        "This is a pre-built flow just for Demo purposes. You can view how it looks like by clicking on the 'Edit' icon.",
+    },
+  ]);
 
   const SwalWithBootstrapButtons = withReactContent(
     Swal.mixin({
@@ -184,153 +191,117 @@ export default () => {
         </Toast>
       </ToastContainer>
 
-      {/* Breadcrumb and Heading */}
-      <div className="d-flex justify-content-between align-items-start m-3">
-        <div className="d-block w-75">
-          <h4>Chatbot Conversation Designer</h4>
-          <b>
-            Design, simulate, and deploy intelligent chatbot conversations with
-            ease.
-          </b>
-          <p>
-            Create dynamic flows using drag-and-drop nodes for bot messages,
-            user inputs, conditions, and API calls. This visual builder helps
-            you plan and manage conversational logic without writing code.
-          </p>
+      {/*  Heading */}
+      <div className="d-flex justify-content-between align-items-start m-3 mt-4">
+        <div className="d-block w-100">
+          <h3>Chatbot Conversation Designer</h3>
+
+          <div className="d-flex align-items-center flex-wrap gap-4 mb-4 mt-3">
+            <Card
+              className="shadow"
+              style={{
+                width: "550px",
+                height: "400px",
+                position: "relative",
+                padding: "30px",
+                textAlign: "center",
+                alignItems: 'center'
+              }}
+            >
+              <b>
+                Design, simulate, and deploy intelligent chatbot conversations
+                with ease.
+              </b>
+              <p>
+                Create dynamic flows using drag-and-drop nodes for bot messages,
+                user inputs, conditions, and API calls. This visual builder
+                helps you plan and manage conversational logic without writing
+                code.
+              </p>
+
+              <Button
+                onClick={handleAddChatbot}
+                variant="secondary"
+                size="sm"
+                className="d-inline-flex align-items-center flex-nowrap"
+              >
+                <PlusIcon className="icon icon-xs me-2" />
+                Create Flow
+              </Button>
+            </Card>
+
+            {/* Chatbot Cards */}
+            {cards.map((card) => (
+              <Card
+                key={card.id}
+                className="shadow"
+                style={{
+                  width: "450px",
+                  height: "400px",
+                  position: "relative",
+                  padding: "30px",
+                  textAlign: "left",
+                }}
+              >
+                {/* Card Content */}
+                <Card.Body className="d-flex flex-column p-0">
+                  <div className="d-flex align-items-center pb-3">
+                    <span className="me-2 fs-4 d-flex align-items-center">
+                      {getChannelIcon(card.channel)}
+                    </span>
+                    <Card.Title className="mb-0 text-truncate h4">
+                      {card.name.toUpperCase()}
+                    </Card.Title>
+                  </div>
+                  <div className="mt-2">
+                    <Card.Text
+                      style={{
+                        fontSize: "16px",
+                        marginTop: "2px",
+                        marginBottom: "0px",
+                      }}
+                    >
+                      {card.description}
+                    </Card.Text>
+                  </div>
+
+                  {/* Edit, Delete, Play, and Pause Buttons */}
+                  <div
+                    style={{
+                    marginTop: 'auto',
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {/* Edit Button */}
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip className="m-0">Edit</Tooltip>}
+                    >
+                      <Card.Link onClick={() => handleEdit(card.id)}>
+                        <TbEdit className="icon icon-wide text-info" />
+                      </Card.Link>
+                    </OverlayTrigger>
+
+                    {/* Delete Button */}
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip className="m-0">Delete</Tooltip>}
+                    >
+                      <Card.Link onClick={() => handleDelete(card.id)}>
+                        <TbTrash className="icon icon-wide text-danger" />
+                      </Card.Link>
+                    </OverlayTrigger>
+                  </div>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
         </div>
 
-        {/* Add Chatbot Button */}
-        <Button
-          onClick={handleAddChatbot}
-          variant="secondary"
-          size="sm"
-          className="ms-auto d-inline-flex align-items-center flex-nowrap"
-        >
-          <PlusIcon className="icon icon-xs me-2" />
-          Create Flow
-        </Button>
       </div>
 
       {/* Create Chatbot Button and Cards  */}
-      <div className="d-flex align-items-center flex-wrap gap-3 mb-4">
-        {/* Chatbot Cards */}
-        <div className="d-flex flex-wrap gap-3">
-          {cards.map((card) => (
-            <Card
-              key={card.id}
-              className="shadow"
-              style={{
-                width: "270px",
-                height: "200px",
-                position: "relative",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {/* Card Content */}
-              <Card.Body className="d-flex flex-column p-0">
-                <div className="d-flex align-items-center border-bottom pb-1">
-                  <span className="me-2 fs-4 d-flex align-items-center">
-                    {getChannelIcon(card.channel)}
-                  </span>
-                  <Card.Title className="mb-0 text-truncate">
-                    {card.name.toUpperCase()}
-                  </Card.Title>
-                </div>
-                <div className="mt-2">
-                  <Card.Text
-                    style={{
-                      fontSize: "12px",
-                      marginTop: "2px",
-                      marginBottom: "0px",
-                    }}
-                    className="truncate-twoline"
-                  >
-                    {card.description}
-                  </Card.Text>
-                </div>
-                <div className="mt-2 d-flex align-items-center">
-                  <Card.Text
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      marginBottom: "0px",
-                    }}
-                    className="text-truncate"
-                  >
-                    Status:{" "}
-                    <span
-                      className={
-                        card.status === "inactive"
-                          ? "text-danger text-capitalize"
-                          : "text-success text-capitalize"
-                      }
-                    >
-                      {card.status}
-                    </span>
-                  </Card.Text>
-                </div>
-
-                {/* Edit, Delete, Play, and Pause Buttons */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "10px",
-                    right: "12px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  {/* Edit Button */}
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip className="m-0">Edit</Tooltip>}
-                  >
-                    <Card.Link onClick={() => handleEdit(card.id)}>
-                      <TbEdit className="icon icon-wide text-info" />
-                    </Card.Link>
-                  </OverlayTrigger>
-
-                  {/* Delete Button */}
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip className="m-0">Delete</Tooltip>}
-                  >
-                    <Card.Link onClick={() => handleDelete(card.id)}>
-                      <TbTrash className="icon icon-wide text-danger" />
-                    </Card.Link>
-                  </OverlayTrigger>
-
-                  {/* Play or Pause Button */}
-                  {card.status === "inactive" ? (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip className="m-0">Activate</Tooltip>}
-                    >
-                      <Card.Link
-                        onClick={() => handleStatus(card.id, card.status)}
-                      >
-                        <IoPlay className="icon icon-wide text-success" />
-                      </Card.Link>
-                    </OverlayTrigger>
-                  ) : (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip className="m-0">Pause</Tooltip>}
-                    >
-                      <Card.Link
-                        onClick={() => handleStatus(card.id, card.status)}
-                      >
-                        <IoPauseCircleOutline className="icon icon-wide text-warning" />
-                      </Card.Link>
-                    </OverlayTrigger>
-                  )}
-                </div>
-              </Card.Body>
-            </Card>
-          ))}
-        </div>
-      </div>
 
       {/* Modal for Add/Edit Chatbot */}
       <Modal
@@ -341,7 +312,7 @@ export default () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Chatbot</Modal.Title>
+          <Modal.Title>Add Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>

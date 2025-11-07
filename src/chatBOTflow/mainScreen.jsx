@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { CheckCircleIcon, ClockIcon, HomeIcon, ShieldExclamationIcon } from "@heroicons/react/solid";
-import { Breadcrumb, Button, Card, Col, Dropdown, Form, Modal, ProgressBar } from "react-bootstrap";
-// import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { CheckCircleIcon, ClockIcon, ShieldExclamationIcon } from "@heroicons/react/solid";
+import { Button, Card, Modal, OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 import { Routes } from "routes";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { RiSettings5Line } from "react-icons/ri";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { AiFillMessage } from "react-icons/ai";
 import HorizontalFlow from "./flowScreen";
 import { IoChevronBack } from "react-icons/io5";
+import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
+import whatsappPic from "../assets/img/mobileScreens/Whatsapp.png"
+
+
 
 
 export default () => {
@@ -24,13 +26,15 @@ export default () => {
     const [variant, setVariant] = useState('primary');
 
     const [chatFlow, setChatFlow] = useState([]);
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [timer, setTimer] = useState(chatDetails.resetTimer || '0');
-    const [backOption, setBackOption] = useState(chatDetails.backOption || '');
+    // const [showDropdown, setShowDropdown] = useState(false);
+    // const [timer, setTimer] = useState(chatDetails.resetTimer || '0');
+    // const [backOption, setBackOption] = useState(chatDetails.backOption || '');
+    const [expanded, setExpanded] = useState(false);
+
     // Close the dropdown
-    const handleSave = () => {
-        setShowDropdown(false);
-    };
+    // const handleSave = () => {
+    //     setShowDropdown(false);
+    // };
 
     const getChannelIcon = (channelName) => {
         switch (channelName) {
@@ -53,67 +57,95 @@ export default () => {
     // console.log("jabba agaya")
 
     const saveFlow = () => {
-    //     if (chatDetails.id) {
-    //         const postData = {
-    //             // ...chatDetails,
-    //             id: chatDetails.id,
-    //             flow: chatFlow,
-    //             resetTimer: timer ? timer : chatDetails.resetTimer,
-    //             backOption: backOption ? backOption : chatDetails.backOption,
-    //         }
-    //         // console.log('updateFlow postData', postData);
+        //     if (chatDetails.id) {
+        //         const postData = {
+        //             // ...chatDetails,
+        //             id: chatDetails.id,
+        //             flow: chatFlow,
+        //             resetTimer: timer ? timer : chatDetails.resetTimer,
+        //             backOption: backOption ? backOption : chatDetails.backOption,
+        //         }
+        //         // console.log('updateFlow postData', postData);
 
-    //         updateFlow(postData)
-    //             .then((success) => {
-    //                 setShowModal(true);
-    //                 if (success?.data?.statusCode >= 200 && success?.data?.statusCode <= 204) {
-    //                     setReason(success.data.message);
-    //                     setVariant('tertiary');
-    //                     setProgress(100);
-    //                 } else {
-    //                     setReason(success?.data?.message || 'Failed to create');
-    //                     setVariant('warning');
-    //                     setProgress(100);
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 setShowModal(true);
-    //                 setReason(error?.data?.message || 'Failed to create');
-    //                 setVariant('warning');
-    //                 setProgress(100);
-    //             });
-    //     }
-    //     else {
-    //         const postData = {
-    //             ...chatDetails,
-    //             flow: chatFlow,
-    //             resetTimer: timer,
-    //             backOption: backOption,
-    //         }
-    //         // console.log('new postData', postData);
+        //         updateFlow(postData)
+        //             .then((success) => {
+        //                 setShowModal(true);
+        //                 if (success?.data?.statusCode >= 200 && success?.data?.statusCode <= 204) {
+        //                     setReason(success.data.message);
+        //                     setVariant('tertiary');
+        //                     setProgress(100);
+        //                 } else {
+        //                     setReason(success?.data?.message || 'Failed to create');
+        //                     setVariant('warning');
+        //                     setProgress(100);
+        //                 }
+        //             })
+        //             .catch((error) => {
+        //                 setShowModal(true);
+        //                 setReason(error?.data?.message || 'Failed to create');
+        //                 setVariant('warning');
+        //                 setProgress(100);
+        //             });
+        //     }
+        //     else {
+        //         const postData = {
+        //             ...chatDetails,
+        //             flow: chatFlow,
+        //             resetTimer: timer,
+        //             backOption: backOption,
+        //         }
+        //         // console.log('new postData', postData);
 
-    //         saveChatFlow(postData)
-    //             .then((success) => {
-    //                 setShowModal(true);
-    //                 if (success?.data?.statusCode >= 200 && success?.data?.statusCode <= 204) {
-    //                     setReason(success.data.message);
-    //                     setVariant('tertiary');
-    //                     setProgress(100);
-    //                 } else {
-    //                     setReason(success?.data?.message || 'Failed to create');
-    //                     setVariant('warning');
-    //                     setProgress(100);
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 setShowModal(true);
-    //                 setReason(error?.data?.message || 'Failed to create');
-    //                 setVariant('warning');
-    //                 setProgress(100);
-    //             });
-    //     }
+        //         saveChatFlow(postData)
+        //             .then((success) => {
+        //                 setShowModal(true);
+        //                 if (success?.data?.statusCode >= 200 && success?.data?.statusCode <= 204) {
+        //                     setReason(success.data.message);
+        //                     setVariant('tertiary');
+        //                     setProgress(100);
+        //                 } else {
+        //                     setReason(success?.data?.message || 'Failed to create');
+        //                     setVariant('warning');
+        //                     setProgress(100);
+        //                 }
+        //             })
+        //             .catch((error) => {
+        //                 setShowModal(true);
+        //                 setReason(error?.data?.message || 'Failed to create');
+        //                 setVariant('warning');
+        //                 setProgress(100);
+        //             });
+        //     }
     }
 
+    const boxRef = useRef();
+
+    const toggleFullScreen = () => {
+        if (!expanded) {
+            setExpanded(true);
+            const element = boxRef.current;
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) { // Firefox
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) { // IE/Edge
+                element.msRequestFullscreen();
+            }
+        } else {
+            setExpanded(false);
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+        }
+    }
 
     // MODAL
     const handleCloseModal = () => {
@@ -141,8 +173,15 @@ export default () => {
 
 
     return (
-        <>
-            <div className="flow-main-screen m-3">
+        <div className="d-flex flex-row-reverse gap-2 m-3">
+            <div className="img-cont">
+                <img src={whatsappPic} alt="whatsapp preview" />
+                <div classname="preview-cont">
+
+                </div>
+            </div>
+
+            <div className="flow-main-screen" ref={boxRef}>
                 {/* headers */}
                 <div className="d-flex justify-content-between align-items-center pb-2">
                     <div className="d-flex flex-column p-0 w-50">
@@ -151,19 +190,41 @@ export default () => {
                             <Card.Title className="me-2 mb-0 text-white text-truncate">
                                 {chatDetails?.name.toUpperCase()}
                             </Card.Title>
-                            {/* <TbEdit className="icon icon-sm flex-shrink-0 popOut" /> */}
                         </div>
                         <p className="m-0 truncate-twoline" style={{ color: "#c4c2c2", fontSize: "0.8rem" }}>
                             {chatDetails?.description}
                         </p>
                     </div>
                     <div className="d-flex">
-                        <Button variant="secondary" type="submit" className="scale-up-2 me-2" onClick={saveFlow}>
-                            Save
-                        </Button>
-                        <Button className="scale-up-2 me-2" as={Link} to={Routes.ChatBot.path}>
-                            <IoChevronBack className="icon icon-xs"/>
-                        </Button>
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip className="m-0">Save</Tooltip>}
+                        >
+                            <Button variant="secondary" type="submit" className="scale-up-2 me-2" onClick={saveFlow}>
+                                Save
+                            </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip className="m-0">{expanded ? 'Exit ' : ''}Full Screen</Tooltip>}
+                        >
+                            <Button variant="secondary" type="submit" className="scale-up-2 me-2" onClick={toggleFullScreen}>
+                                {expanded ?
+                                    <MdFullscreenExit className="icon icon-xs" />
+                                    :
+                                    <MdFullscreen className="icon icon-xs" />
+                                }
+                            </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip className="m-0">Back</Tooltip>}
+                        >
+                            <Button className="scale-up-2 me-2" as={Link} to={Routes.ChatBot.path}>
+                                <IoChevronBack className="icon icon-xs" />
+                            </Button>
+                        </OverlayTrigger>
+
                     </div>
                 </div>
 
@@ -216,6 +277,7 @@ export default () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
+
     );
 }

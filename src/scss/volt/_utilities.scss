@@ -1,95 +1,123 @@
-// check docs https://v5.getbootstrap.com/docs/5.0/utilities/api/
+@mixin filter($filter) {
+    -webkit-filter: #{$filter};
+	-moz-filter: #{$filter};
+	-ms-filter: #{$filter};
+	-o-filter: #{$filter};
+	filter: #{$filter};
+}
 
-$utilities: map-merge(
-  $utilities,
-  (
-    "blur": (
-      property: backdrop-filter,
-      class: blur,
-      values: (
-        0: blur(0),
-        1: blur(1px),
-        2: blur(2px),
-        3: blur(3px),
-        4: blur(4px),
-        5: blur(5px),
-        6: blur(6px),
-        7: blur(7px),
-        8: blur(8px),
-        9: blur(91px),
-        10: blur(10px),
-        11: blur(11px),
-        12: blur(12px),
-        13: blur(13px),
-        14: blur(14px),
-      ),
-    ),
-    "opacity": (
-      property: opacity,
-      class: o,
-      values: (
-        0: 0,
-        25: 0.25,
-        50: 0.5,
-        75: 0.75,
-        100: 1,
-      ),
-    ),
-    "z-index": (
-      property: z-index,
-      class: z,
-      values: (
-        0: 0,
-        1: 1,
-        2: 2,
-        3: 3,
-        999: 999,
-      ),
-    ),
-    "viewport-height": (
-      property: height,
-      class: vh,
-      responsive: true,
-      values: (
-        100: 100vh,
-      ),
-    ),
-    "font-weight": (
-      property: font-weight,
-      class: fw,
-      values: (
-        light: $font-weight-light,
-        lighter: $font-weight-lighter,
-        normal: $font-weight-normal,
-        bold: $font-weight-bold,
-        bolder: $font-weight-bolder,
-        extrabold: $font-weight-extrabold,
-        black: $font-weight-black,
-      ),
-    ),
-    "max-width": (
-      property: max-width,
-      class: fmxw,
-      values: (
-        100: 100px,
-        200: 200px,
-        300: 300px,
-        400: 400px,
-        500: 500px,
-        999: 999px,
-      ),
-    ),
-    "min-height": (
-      property: min-height,
-      class: fmxh,
-      values: (
-        100: 100px,
-        200: 200px,
-        300: 300px,
-        400: 400px,
-        500: 500px,
-        999: 999px,
-      ),
-    ),
-  )
-);
+@mixin backface-visibility($value) {
+	-webkit-backface-visibility: $value;
+	-moz-backface-visibility: $value;
+	-o-backface-visibility: $value;
+	backface-visibility: $value;
+}
+
+@mixin transform-style($value) {
+	-webkit-transform-style: $value;
+	-moz-transform-style: $value;
+	-o-transform-style: $value;
+	transform-style: $value;
+}
+
+@mixin perspective($value) {
+	-webkit-perspective: $value;
+    -moz-perspective: $value;
+    -o-perspective: $value;
+    perspective: $value;
+}
+
+@mixin display-flex() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+@mixin flex($values) {
+	-webkit-box-flex: $values;
+	   -moz-box-flex: $values;
+		-webkit-flex: $values;
+		  -ms-flex: $values;
+			  flex: $values;
+  }
+  
+  @mixin flex-direction($direction) {
+	-webkit-flex-direction: $direction;
+	   -moz-flex-direction: $direction;
+		-ms-flex-direction: $direction;
+			flex-direction: $direction;
+  }
+  
+  @mixin flex-wrap($wrap) {
+	-webkit-flex-wrap: $wrap;
+	   -moz-flex-wrap: $wrap;
+		-ms-flex-wrap: $wrap;
+			flex-wrap: $wrap;
+  }
+  
+  @mixin flex-flow($flow) {
+	-webkit-flex-flow: $flow;
+	   -moz-flex-flow: $flow;
+		-ms-flex-flow: $flow;
+			flex-flow: $flow;
+  }
+  
+  @mixin order($val) {
+	-webkit-box-ordinal-group: $val;  
+	   -moz-box-ordinal-group: $val;     
+			 -ms-flex-order: $val;     
+			  -webkit-order: $val;  
+				  order: $val;
+  }
+  
+  @mixin flex-grow($grow) {
+	-webkit-flex-grow: $grow;
+	   -moz-flex-grow: $grow;
+		-ms-flex-grow: $grow;
+			flex-grow: $grow;
+  }
+  
+  @mixin flex-shrink($shrink) {
+	-webkit-flex-shrink: $shrink;
+	   -moz-flex-shrink: $shrink;
+		-ms-flex-shrink: $shrink;
+			flex-shrink: $shrink;
+  }
+  
+  @mixin flex-basis($width) {
+	-webkit-flex-basis: $width;
+	   -moz-flex-basis: $width;
+		-ms-flex-basis: $width;
+			flex-basis: $width;
+  }
+  
+  @mixin justify-content($justify) {
+	-webkit-justify-content: $justify;
+	   -moz-justify-content: $justify;
+		-ms-justify-content: $justify;
+			justify-content: $justify;
+			  -ms-flex-pack: $justify;
+  }
+  
+  @mixin align-content($align) {
+	-webkit-align-content: $align;
+	   -moz-align-content: $align;
+		-ms-align-content: $align;
+			align-content: $align;
+  }
+  
+  @mixin align-items($align) {
+	-webkit-align-items: $align;
+	   -moz-align-items: $align;
+		-ms-align-items: $align;
+			align-items: $align;
+  }
+  
+  @mixin align-self($align) {
+	-webkit-align-self: $align;
+	   -moz-align-self: $align;
+		-ms-align-self: $align;
+			align-self: $align;
+  }

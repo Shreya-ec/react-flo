@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactFlow, {
     useNodesState,
     useEdgesState,
-    addEdge,
     Controls,
     Handle, // Handle might not exist in older versions; remove if necessary
 } from "react-flow-renderer";
@@ -14,6 +13,8 @@ import { MdAddCircleOutline, MdOutlineSettings } from "react-icons/md";
 import { APIModal, BotResponseModal, LoopbackModal, UserInputModal } from "components/Modals";
 import { TbEdit } from "react-icons/tb";
 import { XCircleIcon } from "@heroicons/react/outline";
+import { v4 as uuidv4 } from "uuid";
+
 
 // Custom Node Component
 const CustomNode = ({ data }) => {
@@ -261,7 +262,7 @@ const HorizontalFlow = ({ onDataChange }) => {
                 const parentNode = prevNodes.find((node) => node.id === selectedNodeId);
                 if (!parentNode) return prevNodes;
 
-                const newNodeId = (prevNodes.length + 1).toString();
+                const newNodeId = uuidv4();
                 const newNode = {
                     id: newNodeId,
                     connectedTo: parentNode.id,
@@ -330,7 +331,14 @@ const HorizontalFlow = ({ onDataChange }) => {
 
         const allToDelete = collectDescendants(nodeId, nodes);
         const updatedNodes = nodes.filter((node) => !allToDelete.includes(node.id));
+        const updatedEdges = edges.filter(
+            (edge) =>
+              !allToDelete.includes(edge.source) &&
+              !allToDelete.includes(edge.target)
+          );
+
         setNodes(updatedNodes);
+        setEdges(updatedEdges);
 
         // Close menu etc.
         setselectedNodeId(null);
