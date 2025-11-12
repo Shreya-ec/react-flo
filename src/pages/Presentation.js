@@ -3,16 +3,39 @@ import { useHistory } from "react-router-dom";
 import { Routes } from "routes";
 
 export default function Home() {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [shake, setShake] = useState(false);
   const inputRef = useRef(null);
   const history = useHistory();
 
-  const handleStart = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name.trim()) {
-      localStorage.setItem("chatbotUserName", name);
-      history.push(Routes.ChatBot.path);
+
+    const trimmedEmail = email.trim();
+
+    if (trimmedEmail) {
+      try {
+        const res = await fetch("https://formspree.io/f/myzlzgqy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: trimmedEmail }),
+        });
+
+        if (res.ok) {
+          localStorage.setItem("chatbotUser", trimmedEmail);
+          history.push(Routes.ChatBot.path);
+          setSubmitted(true);
+          setEmail("");
+        } else {
+          alert("Something went wrong!");
+        }
+      } catch (error) {
+        console.error("Form submission failed:", error);
+        alert("Network error — please try again!");
+      }
     } else {
       setShake(true);
       if (inputRef.current) inputRef.current.focus();
@@ -31,15 +54,17 @@ export default function Home() {
             <h1 style={{ animationDelay: "0.3s" }}>Every</h1>
             <h1 style={{ animationDelay: "0.6s" }}>Conversation</h1>
             <h3>Design Smarter Chatbot Interactions</h3>
-            <form className="landingForm" onSubmit={handleStart}>
+            <form className="landingForm" onSubmit={handleSubmit}>
               <div className="input-wrapper">
                 <span className={`wave-hand ${shake ? "wiggle" : ""}`}>👋</span>
                 <input
                   ref={inputRef}
-                  type="text"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  // required
                   className="name-input"
                 />
               </div>

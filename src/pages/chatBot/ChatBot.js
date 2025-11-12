@@ -14,7 +14,6 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { TbEdit, TbTrash } from "react-icons/tb";
-import { IoPauseCircleOutline, IoPlay } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { AiFillMessage } from "react-icons/ai";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
@@ -198,26 +197,22 @@ export default () => {
 
           <div className="d-flex align-items-center flex-wrap gap-4 mb-4 mt-3">
             <Card
-              className="shadow"
+              className="border-0"
               style={{
                 width: "550px",
                 height: "400px",
                 position: "relative",
                 padding: "30px",
                 textAlign: "center",
-                alignItems: 'center'
+                alignItems: "center",
+                justifyContent: "space-around",
+                backgroundColor: "#6870d35f",
               }}
             >
               <b>
                 Design, simulate, and deploy intelligent chatbot conversations
                 with ease.
               </b>
-              <p>
-                Create dynamic flows using drag-and-drop nodes for bot messages,
-                user inputs, conditions, and API calls. This visual builder
-                helps you plan and manage conversational logic without writing
-                code.
-              </p>
 
               <Button
                 onClick={handleAddChatbot}
@@ -228,6 +223,12 @@ export default () => {
                 <PlusIcon className="icon icon-xs me-2" />
                 Create Flow
               </Button>
+              <p style={{ textAlign: "justify", padding: "0 30px" }}>
+                Create dynamic flows using drag-and-drop nodes for bot messages,
+                user inputs, conditions, and API calls. This visual builder
+                helps you plan and manage conversational logic without writing
+                code.
+              </p>
             </Card>
 
             {/* Chatbot Cards */}
@@ -265,10 +266,10 @@ export default () => {
                     </Card.Text>
                   </div>
 
-                  {/* Edit, Delete, Play, and Pause Buttons */}
+                  {/* Edit, Delete, Buttons */}
                   <div
                     style={{
-                    marginTop: 'auto',
+                      marginTop: "auto",
                       display: "flex",
                       alignItems: "center",
                     }}
@@ -278,7 +279,10 @@ export default () => {
                       placement="top"
                       overlay={<Tooltip className="m-0">Edit</Tooltip>}
                     >
-                      <Card.Link onClick={() => handleEdit(card.id)}>
+                      <Card.Link
+                        onClick={() => handleEdit(card.id)}
+                        classname="hovericon"
+                      >
                         <TbEdit className="icon icon-wide text-info" />
                       </Card.Link>
                     </OverlayTrigger>
@@ -288,7 +292,10 @@ export default () => {
                       placement="top"
                       overlay={<Tooltip className="m-0">Delete</Tooltip>}
                     >
-                      <Card.Link onClick={() => handleDelete(card.id)}>
+                      <Card.Link
+                        onClick={() => handleDelete(card.id)}
+                        classname="hovericon"
+                      >
                         <TbTrash className="icon icon-wide text-danger" />
                       </Card.Link>
                     </OverlayTrigger>
@@ -298,7 +305,6 @@ export default () => {
             ))}
           </div>
         </div>
-
       </div>
 
       {/* Create Chatbot Button and Cards  */}
