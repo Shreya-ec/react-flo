@@ -1,6 +1,6 @@
 .flow-main-screen {
     width: 98%;
-    height: 87vh;
+    height: 86vh;
     background-color: #111111f7;
     border-radius: 0.5rem;
     padding: 0.7rem;
@@ -239,6 +239,19 @@
     transform: scale(1.1);
     cursor: pointer;
   } 
+
+  .fake-fullscreen {
+    margin: 0;
+    border-radius: 0;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #111111; /* or whatever */
+    z-index: 9999;
+  }
   
   /* ======= RESPONSIVENESS ======= */
   

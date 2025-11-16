@@ -8,7 +8,6 @@ import {
   InputGroup,
   OverlayTrigger,
   Tooltip,
-  ToastContainer,
 } from "react-bootstrap";
 import Select from "react-select";
 import Swal from "sweetalert2";
@@ -19,14 +18,9 @@ import { AiFillMessage } from "react-icons/ai";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { Routes } from "routes";
 import { useHistory } from "react-router-dom";
-import { Toast } from "react-bootstrap";
 
 export default () => {
   const history = useHistory();
-
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastVariant, setToastVariant] = useState("success");
 
   const [showModal, setShowModal] = useState(false);
   const [channelOptions] = useState([
@@ -39,6 +33,7 @@ export default () => {
 
   const [cards, setCards] = useState([
     {
+      id: 1,
       channel: "WhatsApp",
       name: "Demo",
       description:
@@ -55,24 +50,6 @@ export default () => {
       buttonsStyling: false,
     })
   );
-
-  useEffect(() => {
-    console.log("jabba agaya");
-    // fetchChatCards();
-  }, []);
-
-  // const fetchChatCards = async () => {
-  //   // try {
-  //   //   const response = await getListofChats();
-  //   //   if (response?.data?.statusCode === 200) {
-  //   //     setCards(response?.data?.data?.queryData);
-  //   //   } else {
-  //   //     setCards([]);
-  //   //   }
-  //   // } catch (error) {
-  //   //   alert(error.message);
-  //   // }
-  // };
 
   const handleAddChatbot = () => {
     setShowModal(true);
@@ -95,7 +72,7 @@ export default () => {
     }
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
-      return; // Prevent form submission if validation fails
+      return;
     }
 
     // Adding a new card
@@ -122,23 +99,10 @@ export default () => {
     );
   };
 
-  const handleStatus = async (id, status) => {
-    const updatedStatus = status === "inactive" ? "active" : "inactive";
-
-    const postData = {
-      flowId: id,
-      status: updatedStatus,
-    };
-
-    setToastVariant("success");
-    setToastMessage("Status updated successfully");
-    setShowToast(true);
-  };
-
   const handleEdit = (id) => {
-    // const cardToEdit = cards.find((card) => card.id === id);
-    // history.push(Routes.ChatFlowScreen.path);
-    // localStorage.setItem("chatDetails", JSON.stringify(cardToEdit));
+    const cardToEdit = cards.find((card) => card.id === id);
+    history.push(Routes.ChatFlowScreen.path);
+    localStorage.setItem("chatDetails", JSON.stringify(cardToEdit));
   };
 
   // Clear error when user starts typing or selects an option
@@ -175,23 +139,9 @@ export default () => {
 
   return (
     <>
-      <ToastContainer position="top-end" className="p-3">
-        <Toast
-          bg={toastVariant}
-          show={showToast}
-          onClose={() => setShowToast(false)}
-          delay={3000}
-          autohide
-        >
-          <Toast.Header>
-            <strong className="me-auto">Notification</strong>
-          </Toast.Header>
-          <Toast.Body>{toastMessage}</Toast.Body>
-        </Toast>
-      </ToastContainer>
 
       {/*  Heading */}
-      <div className="d-flex justify-content-between align-items-start m-3 mt-4">
+      <div className="d-flex justify-content-between align-items-start m-3 mt-3">
         <div className="d-block w-100">
           <h3>Chatbot Conversation Designer</h3>
 
@@ -201,14 +151,24 @@ export default () => {
               style={{
                 width: "550px",
                 height: "400px",
-                position: "relative",
                 padding: "30px",
-                textAlign: "center",
                 alignItems: "center",
-                justifyContent: "space-around",
+                justifyContent: "center",
                 backgroundColor: "#6870d35f",
               }}
             >
+              <div style={{
+                width: "100%",
+                height: "100%",
+                padding: "10px",
+                textAlign: "center",
+                alignItems: "center",
+                borderRadius: "inherit",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                backgroundColor: "#6870d35f",
+              }}>
               <b>
                 Design, simulate, and deploy intelligent chatbot conversations
                 with ease.
@@ -229,6 +189,7 @@ export default () => {
                 helps you plan and manage conversational logic without writing
                 code.
               </p>
+              </div>
             </Card>
 
             {/* Chatbot Cards */}
@@ -239,7 +200,6 @@ export default () => {
                 style={{
                   width: "450px",
                   height: "400px",
-                  position: "relative",
                   padding: "30px",
                   textAlign: "left",
                 }}

@@ -14,6 +14,7 @@ import { APIModal, BotResponseModal, LoopbackModal, UserInputModal } from "compo
 import { TbEdit } from "react-icons/tb";
 import { XCircleIcon } from "@heroicons/react/outline";
 import { v4 as uuidv4 } from "uuid";
+import {savedFlow} from './savedFlow';
 
 
 // Custom Node Component
@@ -74,7 +75,6 @@ const nodeTypes = {
 };
 
 // Define Node Properties (label, color, icon, allowed children)
-
 const nodeProperties = {
     start: {
         type: "start",
@@ -120,38 +120,19 @@ const nodeProperties = {
     },
 };
 
-const HorizontalFlow = ({ onDataChange }) => {
+const HorizontalFlow = ({ onDataChange, isFullScreen, boxRef }) => {
     // in case of editing
     const [chatDetails] = useState(JSON.parse(localStorage.getItem("chatDetails")) || {});
 
     const chatId = chatDetails.id || null;
 
     useEffect(() => {
-        console.log('chatid', chatId);
-        if (chatId !== null) {
-            fetchOldFlow();
+        if (chatId !== null && chatId === 1) {
+            setNodes(savedFlow)
+            loadFlowFromJson(savedFlow);
         }
+        // eslint-disable-next-line
     }, [chatId])
-
-    const fetchOldFlow = async () => {
-        // try {
-        //     const response = await getFlow({ id: chatId });
-
-        //     // console.log('response', response);
-
-        //     if (response?.data?.statusCode === 200) {
-        //         loadFlowFromJson(response?.data?.data?.queryData?.flow);
-        //         setNodes(response?.data?.data?.queryData?.flow);
-        //     } else {
-        //         alert(response?.data?.message || 'Something went wrong!');
-        //     }
-        // } catch (error) {
-        //     alert(error.data?.message || 'Something went wrong!');
-        // }
-    }
-
-
-
 
     // initial starting node on chat initialisation
     const [nodes, setNodes, onNodesChange] = useNodesState([
@@ -160,7 +141,7 @@ const HorizontalFlow = ({ onDataChange }) => {
             connectedTo: "0",
             type: "start",
             data: { ...nodeProperties["start"] },
-            position: { x: 100, y: 100 },
+            position: { x: 400, y: 100 },
         },
     ]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -190,8 +171,9 @@ const HorizontalFlow = ({ onDataChange }) => {
 
     // opens options
     const onNodeClick = (_, node) => {
+
         if (selectedNode) {
-            setselectedNodeId(false);  //for toggling Menu
+            setselectedNodeId(null);  //for toggling Menu
         } else {
             setselectedNodeId(node.id);  //also sets parent/current node for creating/editing
             setMenuPosition({
@@ -202,7 +184,7 @@ const HorizontalFlow = ({ onDataChange }) => {
 
         // making options for loopback
         const botResponseNodes = nodes
-            .filter(node => node.type === "botResponse" || node.type === "start")  // Filter nodes with type "botResponse"
+            .filter(node => node.type === "botResponse" || node.type === "start") 
             .map(node => ({ value: node.id, label: node.data.title }));  // Extract from node.data
         localStorage.setItem('optionsBack', JSON.stringify(botResponseNodes));
     };
@@ -212,7 +194,7 @@ const HorizontalFlow = ({ onDataChange }) => {
     };
 
     /* Dynamic Modal Component */
-    const DynamicModal = ({ modalType, isOpen, onClose, data, onSubmit }) => {
+    const DynamicModal = ({ modalType, isOpen, onClose, data, onSubmit, container }) => {
         const ModalComponents = {
             userInput: UserInputModal,
             fallback: BotResponseModal,
@@ -224,7 +206,7 @@ const HorizontalFlow = ({ onDataChange }) => {
 
         const SelectedModal = ModalComponents[modalType] || null;
 
-        return SelectedModal ? <SelectedModal isOpen={isOpen} onClose={onClose} data={data} onSubmit={onSubmit} /> : null;
+        return SelectedModal ? <SelectedModal isOpen={isOpen} onClose={onClose} data={data} onSubmit={onSubmit} container={container} /> : null;
     };
 
     const closeModal = () => {
@@ -295,6 +277,7 @@ const HorizontalFlow = ({ onDataChange }) => {
             // console.log('consoling before sending', nodes);
             onDataChange(nodes); // send latest nodes to parent
         }
+        // eslint-disable-next-line
     }, [nodes]);
 
 
@@ -304,14 +287,7 @@ const HorizontalFlow = ({ onDataChange }) => {
         setDataToEdit(findNode);
         openModal(findNode.type);
     }
-
-    // const deleteNode = (nodeId) => {
-    //     const updatedNodes = nodes.filter(node => node.id !== nodeId && node.connectedTo !== nodeId);
-    //     setNodes(updatedNodes);
-    //     // for menu to close
-    //     setselectedNodeId(null);
-    //     setMenuPosition(null);
-    // }
+    
     const deleteNode = (nodeId) => {
         const collectDescendants = (id, allNodes, visited = new Set()) => {
             if (visited.has(id)) return [];
@@ -333,9 +309,9 @@ const HorizontalFlow = ({ onDataChange }) => {
         const updatedNodes = nodes.filter((node) => !allToDelete.includes(node.id));
         const updatedEdges = edges.filter(
             (edge) =>
-              !allToDelete.includes(edge.source) &&
-              !allToDelete.includes(edge.target)
-          );
+                !allToDelete.includes(edge.source) &&
+                !allToDelete.includes(edge.target)
+        );
 
         setNodes(updatedNodes);
         setEdges(updatedEdges);
@@ -351,7 +327,7 @@ const HorizontalFlow = ({ onDataChange }) => {
 
 
     return (
-        <div style={{ height: '92%', position: "relative", border: '1px solid #E5E7EB', borderRadius: 'inherit' }}>
+        <div style={{ height: '91%', border: '1px solid hsla(220, 13.00%, 91.00%, 0.50)', borderRadius: 'inherit' }}>
             {nodes.length >= 1 ?
                 <ReactFlow
                     nodes={nodes}
@@ -427,6 +403,7 @@ const HorizontalFlow = ({ onDataChange }) => {
                     onClose={closeModal}
                     data={{ type: modalType, details: dataToEdit }}
                     onSubmit={handleFormSubmit}
+                    container={isFullScreen ? boxRef.current : document.body}
                 />
             )}
         </div>

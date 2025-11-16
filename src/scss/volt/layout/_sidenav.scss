@@ -136,14 +136,6 @@
 			text-align: center;
 		}
 
-
-		@include media-breakpoint-up(md) {
-			& + .content {
-				margin-left: 95px;
-				
-			}
-		}
-
 		max-width: 95px;
 		min-height: 100vh;
 	}
@@ -170,7 +162,7 @@
 }
 
 .content {
-
+height: 100vh;
 	overflow: hidden;
 	@include transition(all .3s);
 

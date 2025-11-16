@@ -4,7 +4,6 @@ import { Routes } from "routes";
 
 export default function Home() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [shake, setShake] = useState(false);
   const inputRef = useRef(null);
   const history = useHistory();
@@ -27,7 +26,6 @@ export default function Home() {
         if (res.ok) {
           localStorage.setItem("chatbotUser", trimmedEmail);
           history.push(Routes.ChatBot.path);
-          setSubmitted(true);
           setEmail("");
         } else {
           alert("Something went wrong!");
