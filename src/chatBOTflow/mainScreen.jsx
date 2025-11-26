@@ -56,32 +56,41 @@ export default () => {
     setChatFlow(data);
   };
 
-  const saveFlow = () => {
-    if (chatDetails.id) {
-      // const postData = {
-      //   ...chatDetails,
-      //   id: chatDetails.id,
-      //   flow: chatFlow,
-      // };
-      // console.log("updateFlow postData", postData);
+const saveFlow = () => {
+  const oldFlows = JSON.parse(localStorage.getItem("flows")) || [];
 
-      setShowModal(true);
-      setReason("Flow creation successful!");
-      setVariant("tertiary");
-      setProgress(100);
-    } else {
-      const postData = {
-        ...chatDetails,
-        flow: chatFlow,
-      };
-      console.log("saveChatFlow postData", postData);
-localStorage.setItem("chatDetails", JSON.stringify(postData));
-      setShowModal(true);
-      setReason("Flow creation successful!");
-      setVariant("tertiary");
-      setProgress(100);
-    }
-  };
+  if (chatDetails.id) {
+    // UPDATE EXISTING FLOW
+    const updatedFlows = oldFlows.map(flow =>
+      flow.id === chatDetails.id
+        ? { ...chatDetails, id: chatDetails.id, flow: chatFlow }
+        : flow
+    );
+
+    localStorage.setItem("flows", JSON.stringify(updatedFlows));
+  } else {
+    // CREATE NEW FLOW
+    const generateUID = () =>
+      `chat_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+    const newFlow = {
+      ...chatDetails,
+      id: generateUID(),
+      flow: chatFlow,
+    };
+
+    const updatedFlows = [...oldFlows, newFlow];
+
+    localStorage.setItem("flows", JSON.stringify(updatedFlows));
+  }
+
+  // Common UI updates
+  setShowModal(true);
+  setReason("Flow creation successful!");
+  setVariant("tertiary");
+  setProgress(100);
+};
+
 
   const boxRef = useRef();
 
@@ -93,7 +102,7 @@ localStorage.setItem("chatDetails", JSON.stringify(postData));
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const handler = () => {
       if (!document.fullscreenElement) {
         // User exited fullscreen manually (Esc, etc.)
@@ -129,8 +138,6 @@ localStorage.setItem("chatDetails", JSON.stringify(postData));
     }
   }, [showModal]);
 
-
-
   return (
     <div className="d-flex flex-row-reverse gap-2 m-3">
       <div className="img-cont">
@@ -138,7 +145,12 @@ localStorage.setItem("chatDetails", JSON.stringify(postData));
         <div classname="preview-cont"></div>
       </div>
 
-      <div ref={boxRef} className={expanded ? "fake-fullscreen flow-main-screen" : "flow-main-screen"}>
+      <div
+        ref={boxRef}
+        className={
+          expanded ? "fake-fullscreen flow-main-screen" : "flow-main-screen"
+        }
+      >
         {/* headers */}
         <div className="d-flex justify-content-between align-items-center pb-2">
           <div className="d-flex flex-column p-0 w-75">
@@ -208,7 +220,12 @@ localStorage.setItem("chatDetails", JSON.stringify(postData));
         </div>
 
         {/* flow screen */}
-        <HorizontalFlow onDataChange={handleFlowData} isFullScreen={expanded} boxRef={boxRef} />
+        <HorizontalFlow
+          onDataChange={handleFlowData}
+          isFullScreen={expanded}
+          boxRef={boxRef}
+          data={chatDetails.flow || []}
+        />
       </div>
 
       {/* after API Hit */}

@@ -14,7 +14,6 @@ import { APIModal, BotResponseModal, LoopbackModal, UserInputModal } from "compo
 import { TbEdit } from "react-icons/tb";
 import { XCircleIcon } from "@heroicons/react/outline";
 import { v4 as uuidv4 } from "uuid";
-import {savedFlow} from './savedFlow';
 
 
 // Custom Node Component
@@ -120,16 +119,16 @@ const nodeProperties = {
     },
 };
 
-const HorizontalFlow = ({ onDataChange, isFullScreen, boxRef }) => {
+const HorizontalFlow = ({ onDataChange, isFullScreen, boxRef, data }) => {
     // in case of editing
     const [chatDetails] = useState(JSON.parse(localStorage.getItem("chatDetails")) || {});
 
     const chatId = chatDetails.id || null;
 
     useEffect(() => {
-        if (chatId !== null && chatId === 1) {
-            setNodes(savedFlow)
-            loadFlowFromJson(savedFlow);
+        if (chatId !== null && data.length > 0) {
+            setNodes(data)
+            loadFlowFromJson(data);
         }
         // eslint-disable-next-line
     }, [chatId])
