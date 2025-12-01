@@ -139,11 +139,13 @@ const saveFlow = () => {
   }, [showModal]);
 
   return (
-    <div className="d-flex flex-row-reverse gap-2 m-3">
+    <div className="d-flex flex-row-reverse m-3">
       <div className="img-cont">
         <img src={whatsappPic} alt="whatsapp preview" />
-        <div classname="preview-cont"></div>
+        <div classname="preview-cont">
+        </div>
       </div>
+
 
       <div
         ref={boxRef}
