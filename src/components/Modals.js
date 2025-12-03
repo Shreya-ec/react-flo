@@ -382,7 +382,7 @@ export const BotResponseModal = ({ isOpen, onClose, data, onSubmit }) => {
                     </div>
                     <div>
                       {field.MediaFileName ?
-                        <img src={field.MediaFileName} alt="input-image" />
+                        <img src={field.MediaFileName} alt="input" />
                         :
                         <DropImagesForm onFilesUploaded={(e) => handleInputChange(index, "MediaFileName", e.target.value)} />
                       }
