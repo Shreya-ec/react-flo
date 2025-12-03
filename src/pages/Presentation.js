@@ -54,7 +54,13 @@ export default function Home() {
             <h3>Design Smarter Chatbot Interactions</h3>
             <form className="landingForm" onSubmit={handleSubmit}>
               <div className="input-wrapper">
-                <span className={`wave-hand ${shake ? "wiggle" : ""}`}>👋</span>
+                <span
+                  role="img"
+                  aria-label="waving hand"
+                  className={`wave-hand ${shake ? "wiggle" : ""}`}
+                >
+                  👋
+                </span>
                 <input
                   ref={inputRef}
                   type="email"
@@ -67,7 +73,11 @@ export default function Home() {
                 />
               </div>
               <button type="submit" className="submitBtn">
-                🚀 Get Started
+                <span role="img" aria-label="rocket">
+                  {" "}
+                  🚀
+                </span>
+                Get Started
               </button>
             </form>
           </div>
