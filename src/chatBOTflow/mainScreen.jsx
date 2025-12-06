@@ -21,7 +21,7 @@ import { AiFillMessage } from "react-icons/ai";
 import HorizontalFlow from "./flowScreen";
 import { IoChevronBack } from "react-icons/io5";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
-import whatsappPic from "../assets/img/mobileScreens/Whatsapp.png";
+// import whatsappPic from "../assets/img/mobileScreens/Whatsapp.png";
 
 export default () => {
   const history = useHistory();

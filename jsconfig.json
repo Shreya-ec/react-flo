@@ -9,5 +9,5 @@
         "src/api/.js",
         "src/api/SuperAdmin/UserOnboarding/userType.js",
         "src/api/"
-    ]
+    ],
 }
