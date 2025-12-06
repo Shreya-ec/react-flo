@@ -140,11 +140,11 @@ const saveFlow = () => {
 
   return (
     <div className="d-flex flex-row-reverse m-3">
-      <div className="img-cont">
+      {/* <div className="img-cont">
         <img src={whatsappPic} alt="whatsapp preview" />
         <div classname="preview-cont">
         </div>
-      </div>
+      </div> */}
 
 
       <div
@@ -171,7 +171,7 @@ const saveFlow = () => {
               {chatDetails?.description}
             </p>
           </div>
-          <div className="d-flex">
+          <div className="d-flex flex-wrap gap-2">
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip className="m-0">Save</Tooltip>}
@@ -179,7 +179,7 @@ const saveFlow = () => {
               <Button
                 variant="secondary"
                 type="submit"
-                className="scale-up-2 me-2"
+                className="scale-up-2"
                 onClick={saveFlow}
               >
                 Save
@@ -196,7 +196,7 @@ const saveFlow = () => {
               <Button
                 variant="secondary"
                 type="submit"
-                className="scale-up-2 me-2"
+                className="scale-up-2"
                 onClick={toggleFullScreen}
               >
                 {expanded ? (
@@ -211,7 +211,7 @@ const saveFlow = () => {
               overlay={<Tooltip className="m-0">Back</Tooltip>}
             >
               <Button
-                className="scale-up-2 me-2"
+                className="scale-up-2"
                 as={Link}
                 to={Routes.ChatBot.path}
               >

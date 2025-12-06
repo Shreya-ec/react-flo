@@ -18,7 +18,7 @@ import { AiFillMessage } from "react-icons/ai";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { Routes } from "routes";
 import { useHistory } from "react-router-dom";
-import {savedFlow} from '../../chatBOTflow/savedFlow';
+import { savedFlow } from "../../chatBOTflow/savedFlow";
 
 export default () => {
   const history = useHistory();
@@ -38,17 +38,17 @@ export default () => {
       name: "Demo",
       description:
         "This is a pre-built flow just for Demo purposes. You can view how it looks like by clicking on the 'Edit' icon.",
-        flow: savedFlow,
+      flow: savedFlow,
     },
   ]);
 
-useEffect(() => {
-  const stored = JSON.parse(localStorage.getItem("flows")) || [];
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("flows")) || [];
 
-  if (stored.length > 0) {
-    setCards((prevCards) => [...prevCards, ...stored]);
-  }
-}, []);
+    if (stored.length > 0) {
+      setCards((prevCards) => [...prevCards, ...stored]);
+    }
+  }, []);
 
   const SwalWithBootstrapButtons = withReactContent(
     Swal.mixin({
@@ -157,8 +157,8 @@ useEffect(() => {
             <Card
               className="border-0"
               style={{
-                width: "550px",
-                height: "400px",
+                width: "450px",
+                minHeight: "400px",
                 padding: "30px",
                 alignItems: "center",
                 justifyContent: "center",
@@ -168,8 +168,7 @@ useEffect(() => {
               <div
                 style={{
                   width: "100%",
-                  height: "100%",
-                  padding: "10px",
+                  padding: "20px",
                   textAlign: "center",
                   alignItems: "center",
                   borderRadius: "inherit",
@@ -188,17 +187,24 @@ useEffect(() => {
                   onClick={handleAddChatbot}
                   variant="secondary"
                   size="sm"
-                  className="d-inline-flex align-items-center flex-nowrap"
+                  className="my-3 d-inline-flex align-items-center flex-nowrap"
                 >
                   <PlusIcon className="icon icon-xs me-2" />
                   Create Flow
                 </Button>
-                <p style={{ textAlign: "justify", padding: "0 30px" }}>
+                <Card.Text
+                  style={{
+                    fontSize: "16px",
+                    marginTop: "2px",
+                    marginBottom: "20px",
+
+                  }}
+                >
                   Create dynamic flows using drag-and-drop nodes for bot
                   messages, user inputs, conditions, and API calls. This visual
                   builder helps you plan and manage conversational logic without
                   writing code.
-                </p>
+                </Card.Text>
               </div>
             </Card>
 
